@@ -1,0 +1,51 @@
+{
+  "version": 5,
+  "cmakeMinimumRequired": { "major": 3, "minor": 24, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}"
+    },
+    {
+      "name": "xp-base",
+      "hidden": true,
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "C:/mingw32/bin/gcc.exe",
+        "__REACTOS__": "ON"
+      }
+    },
+    {
+      "name": "xp-debug",
+      "displayName": "Windows XP - Debug (MinGW32)",
+      "inherits": "xp-base",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
+    },
+    {
+      "name": "xp-release",
+      "displayName": "Windows XP - Release (MinGW32)",
+      "inherits": "xp-base",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+    },
+    {
+      "name": "windows-debug",
+      "displayName": "Recent Windows - Debug",
+      "inherits": "base",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug", "__REACTOS__": "OFF" }
+    },
+    {
+      "name": "windows-release",
+      "displayName": "Recent Windows - Release",
+      "inherits": "base",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release", "__REACTOS__": "OFF" }
+    }
+  ],
+  "buildPresets": [
+    { "name": "xp-debug", "configurePreset": "xp-debug", "targets": ["ffmpeg_build"] },
+    { "name": "xp-release", "configurePreset": "xp-release", "targets": ["ffmpeg_build"] },
+    { "name": "windows-debug", "configurePreset": "windows-debug", "targets": ["ffmpeg_build"] },
+    { "name": "windows-release", "configurePreset": "windows-release", "targets": ["ffmpeg_build"] }
+  ]
+}
