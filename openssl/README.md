@@ -41,7 +41,7 @@ the same names must not be shared between these builds.
 
 ## In windows-build-all / CLion
 
-The outer `tools/openssl/windows-build-all.cmake` connects this project to ca2's
+The outer `operating_system/operating_system-windows/tools/openssl/windows-build-all.cmake` connects this project to ca2's
 `libcrypto` and `libssl` targets. There is no dependency on a manually installed
 OpenSSL SDK. Reload CMake after updating the files.
 

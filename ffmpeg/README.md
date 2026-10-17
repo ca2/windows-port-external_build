@@ -2,7 +2,7 @@
 
 This directory is a standalone CMake project. It does not require the ca2 parent
 project, storage layout, or deployment scripts. The parent owns its settings and
-staging in `tools/ffmpeg/windows-build-all.cmake`; `port.cmake` remains a legacy entry point.
+staging in `operating_system/operating_system-windows/tools/ffmpeg/windows-build-all.cmake`; `port.cmake` remains a legacy entry point.
 
 ## Prerequisites
 
@@ -82,9 +82,9 @@ generators are not supported by this wrapper.
 ## Integration with windows-build-all
 
 The parent repository configures this project through
-[`tools/ffmpeg/windows-build-all.cmake`](../../../tools/ffmpeg/windows-build-all.cmake),
+[`operating_system/operating_system-windows/tools/ffmpeg/windows-build-all.cmake`](../../../operating_system/operating_system-windows/tools/ffmpeg/windows-build-all.cmake),
 included by `port/port.cmake` when `INCLUDE_AUDIO` is enabled. See the
-[parent integration README](../../../tools/ffmpeg/README.md) for its settings.
+[parent integration README](../../../operating_system/operating_system-windows/tools/ffmpeg/README.md) for its settings.
 The standalone CMake project does not depend on that integration.
 
 The parent sets overridable `FFMPEG_*` cache variables before adding this project:
