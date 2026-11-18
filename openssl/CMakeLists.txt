@@ -87,7 +87,7 @@ set(build_root "${CMAKE_CURRENT_BINARY_DIR}/openssl-${OPENSSL_VERSION}-${profile
 set(settings "${CMAKE_CURRENT_BINARY_DIR}/openssl-settings.cmake")
 set(settings_content "# Generated OpenSSL settings\n")
 foreach(name IN ITEMS CMAKE_C_COMPILER CMAKE_AR CMAKE_RANLIB CMAKE_RC_COMPILER CMAKE_OBJDUMP
-        CMAKE_SIZEOF_VOID_P CMAKE_BUILD_TYPE MSVC __REACTOS__ OPENSSL_VERSION OPENSSL_BASH
+        CMAKE_SIZEOF_VOID_P CMAKE_C_COMPILER_ARCHITECTURE_ID CMAKE_BUILD_TYPE MSVC __REACTOS__ OPENSSL_VERSION OPENSSL_BASH
         OPENSSL_PERL OPENSSL_MAKE OPENSSL_NASM OPENSSL_ASM OPENSSL_INSTALL_DIR OPENSSL_JOBS
         OPENSSL_RUN_TESTS OPENSSL_VERIFY OPENSSL_EXTRA_CONFIGURE_ARGS)
     string(APPEND settings_content "set(${name} [==[${${name}}]==])\n")
@@ -107,7 +107,9 @@ else()
     set(source_arguments SOURCE_DIR "${build_root}/source" DOWNLOAD_DIR "${CMAKE_CURRENT_BINARY_DIR}/downloads"
         URL "${download_url}" URL_HASH "SHA256=${archive_hash}" DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
 endif()
-if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+if(MSVC AND CMAKE_C_COMPILER_ARCHITECTURE_ID STREQUAL "ARM64")
+    set(dll_suffix -arm64)
+elseif(CMAKE_SIZEOF_VOID_P EQUAL 8)
     set(dll_suffix -x64)
 else()
     set(dll_suffix "")
