@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenSSL — Windows x64 Build Dependencies</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f6f8fa;
+      --card: #ffffff;
+      --text: #1f2328;
+      --muted: #59636e;
+      --border: #d0d7de;
+      --accent: #0969da;
+      --warn-bg: #fff8c5;
+      --warn-border: #d4a72c;
+      --warn-text: #4d2d00;
+      --code-bg: #eff1f3;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1117;
+        --card: #161b22;
+        --text: #e6edf3;
+        --muted: #8b949e;
+        --border: #30363d;
+        --accent: #58a6ff;
+        --warn-bg: #3b2e00;
+        --warn-border: #d29922;
+        --warn-text: #f2cc60;
+        --code-bg: #21262d;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem 1.25rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    main { max-width: 820px; margin: 0 auto; }
+    header { margin-bottom: 1.5rem; }
+    h1 { margin: 0 0 0.4rem; font-size: 1.65rem; }
+    .subtitle { margin: 0; color: var(--muted); }
+    .arch-nav {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .arch-nav a, .arch-nav span {
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+    }
+    .arch-nav .active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+      font-weight: 600;
+    }
+    #missing-banner {
+      display: none;
+      margin: 1rem 0 1.5rem;
+      padding: 0.9rem 1.1rem;
+      border-radius: 8px;
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+      color: var(--warn-text);
+      font-weight: 500;
+    }
+    .dep {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.4rem;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .dep:target,
+    .dep.is-missing {
+      border-color: var(--warn-border);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--warn-border) 28%, transparent);
+    }
+    .dep-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.6rem;
+    }
+    .dep-header h2 { margin: 0; font-size: 1.15rem; }
+    .badge {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .badge.required { border-color: var(--accent); color: var(--accent); }
+    .download-link {
+      display: inline-block;
+      margin: 0.35rem 0 0.75rem;
+      padding: 0.45rem 0.85rem;
+      border-radius: 6px;
+      background: var(--accent);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+    .download-link:hover { opacity: 0.9; }
+    ol { margin: 0.4rem 0 0.2rem; padding-left: 1.3rem; }
+    li { margin-bottom: 0.35rem; }
+    code {
+      font-family: Consolas, "Cascadia Mono", "Courier New", monospace;
+      font-size: 0.9em;
+      background: var(--code-bg);
+      padding: 0.12rem 0.35rem;
+      border-radius: 4px;
+    }
+    .note { margin: 0.65rem 0 0; font-size: 0.92rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>OpenSSL — Windows x64 Build Dependencies</h1>
+      <p class="subtitle">
+        Host tools checked by <code>port/external_build/openssl/CMakeLists.txt</code> when building OpenSSL for Windows x64.
+      </p>
+      <nav class="arch-nav" aria-label="Architecture">
+        <span class="active">x64</span>
+        <a href="arm64.html">ARM64</a>
+      </nav>
+    </header>
+
+    <div id="missing-banner" role="alert"></div>
+
+    <section class="dep" id="perl">
+      <div class="dep-header">
+        <h2>Native Windows Perl (Strawberry Perl — 64-bit x64)</h2>
+        <span class="badge required">Required — MSVC x64</span>
+      </div>
+      <p>
+        OpenSSL's MSVC configure script requires a native Windows Perl (<code>$^O == MSWin32</code>).
+        MSYS2 or Git Bash Perl will not work for MSVC builds.
+      </p>
+      <a class="download-link" href="https://strawberryperl.com/" target="_blank" rel="noopener noreferrer">
+        Open Strawberry Perl Download Page
+      </a>
+      <ol>
+        <li>On the Strawberry Perl homepage, choose the <strong>Recommended version — 64-bit MSI installer</strong> (<code>.msi</code>, not the Portable ZIP).</li>
+        <li>Run the MSI installer using the default destination directory (<code>C:\Strawberry\</code>).</li>
+        <li>Restart Visual Studio or your build terminal if <code>PATH</code> was updated, then rebuild.</li>
+      </ol>
+      <p class="note">
+        Checked by CMake: <code>perl.exe</code> in <code>PATH</code> or <code>C:/Strawberry/perl/bin</code>, and
+        <code>perl -e "print $^O"</code> returning <code>MSWin32</code>.
+      </p>
+    </section>
+
+    <section class="dep" id="nmake">
+      <div class="dep-header">
+        <h2>NMake (Visual Studio C++ x64 Build Tools)</h2>
+        <span class="badge required">Required — MSVC x64</span>
+      </div>
+      <p>
+        OpenSSL's MSVC makefiles are built with <code>nmake.exe</code> from Visual Studio.
+      </p>
+      <a class="download-link" href="https://visualstudio.microsoft.com/downloads/" target="_blank" rel="noopener noreferrer">
+        Open Visual Studio Downloads
+      </a>
+      <ol>
+        <li>Download <strong>Visual Studio</strong> (Community/Pro/Enterprise) or scroll to <strong>Tools for Visual Studio → Build Tools for Visual Studio</strong>.</li>
+        <li>In Visual Studio Installer, enable the <strong>Desktop development with C++</strong> workload (includes MSVC x64/x86 build tools and <code>nmake.exe</code>).</li>
+      </ol>
+      <p class="note">
+        Checked by CMake: <code>nmake.exe</code> available inside the Visual Studio <code>vcvarsall.bat x64</code> environment.
+      </p>
+    </section>
+
+    <section class="dep" id="nasm">
+      <div class="dep-header">
+        <h2>NASM Assembler (win64)</h2>
+        <span class="badge">Optional — MSVC x64 with OPENSSL_ASM=ON</span>
+      </div>
+      <p>
+        Only required if you explicitly enable <code>-DOPENSSL_ASM=ON</code> when building OpenSSL x64 with MSVC.
+      </p>
+      <a class="download-link" href="https://www.nasm.us/" target="_blank" rel="noopener noreferrer">
+        Open NASM Download Page
+      </a>
+      <ol>
+        <li>Click <strong>Download</strong>, open the latest stable version folder, and open <strong><code>win64/</code></strong>.</li>
+        <li>Download and run <strong><code>nasm-*-installer-x64.exe</code></strong>.</li>
+        <li>Ensure the NASM install directory is on your system <code>PATH</code>, then restart Visual Studio.</li>
+      </ol>
+      <p class="note">
+        Checked by CMake: <code>nasm.exe</code> in <code>PATH</code> when <code>OPENSSL_ASM</code> is enabled.
+      </p>
+    </section>
+
+    <section class="dep" id="msys2">
+      <div class="dep-header">
+        <h2>MSYS2 (bash, GNU make, MSYS Perl)</h2>
+        <span class="badge">Required — MinGW / ReactOS only</span>
+      </div>
+      <p>
+        OpenSSL's MinGW/ReactOS build uses MSYS2 <code>bash.exe</code>, GNU <code>make</code>, and MSYS Perl (not Strawberry Perl).
+      </p>
+      <a class="download-link" href="https://www.msys2.org/" target="_blank" rel="noopener noreferrer">
+        Open MSYS2 Download Page
+      </a>
+      <ol>
+        <li>Under <strong>Installation</strong> on the MSYS2 homepage, click <strong>Download the installer</strong> (<code>msys2-x86_64-*.exe</code>).</li>
+        <li>Install to the default directory (<code>C:\msys64</code>).</li>
+        <li>Open the MSYS2 terminal and install GNU make and Perl if not already present: <code>pacman -S make perl</code>.</li>
+      </ol>
+      <p class="note">
+        Checked by CMake: <code>bash.exe</code> in <code>PATH</code> or <code>C:/msys64/usr/bin</code>.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var id = (window.location.hash || "").replace(/^#/, "");
+      if (!id) return;
+      var section = document.getElementById(id);
+      var banner = document.getElementById("missing-banner");
+      if (!section || !banner) return;
+      section.classList.add("is-missing");
+      var title = section.querySelector("h2");
+      banner.textContent = "Missing required Windows x64 build dependency: " + (title ? title.textContent : id) + ". Install it using the steps highlighted below, then re-run the build.";
+      banner.style.display = "block";
+    })();
+  </script>
+</body>
+</html>

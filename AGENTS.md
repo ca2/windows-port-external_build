@@ -44,3 +44,25 @@
   Build from the permanent source path so the debugger can open the source
   files referenced by the PDB. Verify the PDB matches the DLL and a recorded
   source path resolves on disk before publishing Debug artifacts.
+
+## Host build dependencies
+
+- Document each formula's Windows host build dependencies per target
+  architecture under `port/external_build/<formula>/dependencies/windows/`,
+  using `<arch>.html` (for example `x64.html` and `arm64.html`), with an
+  optional `index.html` landing/fallback page.
+- Dependencies may be enumerated upfront or discovered during an actual build.
+  Whenever a missing dependency is encountered during a build, add or update
+  both the check in `CMakeLists.txt` and the corresponding entry in the
+  affected `<arch>.html` pages so the HTML documentation stays aligned with
+  what the formula actually verifies.
+- Give each dependency entry in `<arch>.html` a stable lowercase HTML `id`
+  (for example `id="perl"`, `id="nmake"`, `id="nasm"`, `id="msys2"`), a link
+  to the recommended package download page, and minimal installation
+  instructions noting which download link/installer to choose for that
+  architecture.
+- When a dependency check fails in `CMakeLists.txt`, include
+  `MISSING_DEPENDENCY:<id>` in the `FATAL_ERROR` message (using the same `<id>`
+  as the HTML page) so `application_build_helper` can automatically open
+  `dependencies/windows/<arch>.html#<id>` (falling back to `index.html#<id>`)
+  in the local browser.
