@@ -1,0 +1,15 @@
+{
+  "version": 5,
+  "configurePresets": [
+    {
+      "name": "xp-debug",
+      "generator": "Ninja",
+      "cacheVariables": { "__REACTOS__": "ON", "CMAKE_BUILD_TYPE": "Debug" }
+    },
+    {
+      "name": "xp-release",
+      "generator": "Ninja",
+      "cacheVariables": { "__REACTOS__": "ON", "CMAKE_BUILD_TYPE": "Release" }
+    }
+  ]
+}

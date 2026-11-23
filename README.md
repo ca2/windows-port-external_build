@@ -9,6 +9,8 @@ outputs to its application dependencies.
   dependency integration.
 - [OpenSSL external build](openssl/README.md): OpenSSL 3.0 for XP/ReactOS and
   3.5 LTS for recent Windows, MinGW/MSVC, and automatic SDK/runtime staging.
+- [CEF redistributable](cefclient/README.md): deploys the pinned prebuilt SDK,
+  runtime resources, headers, and C++ wrapper.
 
 ## Shared Windows headers
 

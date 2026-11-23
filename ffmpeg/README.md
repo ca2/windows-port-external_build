@@ -1,8 +1,8 @@
 # Standalone FFmpeg build for Windows
 
 This directory is a standalone CMake project. It does not require the ca2 parent
-project, storage layout, or deployment scripts. The parent owns its settings and
-staging in `operating_system/operating_system-windows/tools/ffmpeg/windows-build-all.cmake`; `port.cmake` remains a legacy entry point.
+project or its deployment scripts. [`port.cmake`](port.cmake) connects the
+formula to the parent build and handles application runtime staging.
 
 ## Prerequisites
 
@@ -81,10 +81,8 @@ generators are not supported by this wrapper.
 
 ## Integration with windows-build-all
 
-The parent repository configures this project through
-[`operating_system/operating_system-windows/tools/ffmpeg/windows-build-all.cmake`](../../../operating_system/operating_system-windows/tools/ffmpeg/windows-build-all.cmake),
-included by `port/port.cmake` when `INCLUDE_AUDIO` is enabled. See the
-[parent integration README](../../../operating_system/operating_system-windows/tools/ffmpeg/README.md) for its settings.
+The parent repository configures this project through [`port.cmake`](port.cmake)
+when `INCLUDE_AUDIO` is enabled. That adapter defines the parent-build defaults.
 The standalone CMake project does not depend on that integration.
 
 The parent sets overridable `FFMPEG_*` cache variables before adding this project:
