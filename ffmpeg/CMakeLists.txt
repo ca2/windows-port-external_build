@@ -161,6 +161,8 @@ ExternalProject_Add(ffmpeg_build ${source_arguments}
     LOG_DOWNLOAD ON LOG_CONFIGURE ON LOG_BUILD ON LOG_INSTALL ON LOG_OUTPUT_ON_FAILURE ON)
 ExternalProject_Add_StepDependencies(ffmpeg_build configure "${settings}"
     "${CMAKE_CURRENT_SOURCE_DIR}/configure.cmake" "${CMAKE_CURRENT_SOURCE_DIR}/ffmpeg-xp-compat.h")
+include("${CMAKE_CURRENT_LIST_DIR}/../stage-headers.cmake")
+external_build_stage_headers(ffmpeg_build "${FFMPEG_INSTALL_DIR}")
 foreach(component IN LISTS components)
     add_dependencies(${component} ffmpeg_build)
 endforeach()

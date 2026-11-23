@@ -20,6 +20,10 @@
   `storage-windows/<architecture>/<configuration>/library` respectively.
   Use the selected compiler, architecture, and configuration for the
   formula. Keep the ReactOS/XP path behind `__REACTOS__`.
+- Register `external_build_stage_headers` from `stage-headers.cmake` for each
+  Windows formula. It merges the installed SDK's include tree into the consuming
+  checkout's sibling
+  `../operating_system/storage-windows/<architecture>/<configuration>/include`.
 
 ## Source and Debug layout
 

@@ -1,0 +1,10 @@
+if(NOT IS_DIRECTORY "${SDK_INCLUDE_DIR}" OR NOT STORAGE_INCLUDE_DIR)
+    message(FATAL_ERROR "An installed SDK include directory and a storage include directory are required")
+endif()
+
+file(REAL_PATH "${SDK_INCLUDE_DIR}" source)
+file(MAKE_DIRECTORY "${STORAGE_INCLUDE_DIR}")
+file(REAL_PATH "${STORAGE_INCLUDE_DIR}" destination)
+if(NOT source STREQUAL destination)
+    file(COPY "${source}/" DESTINATION "${destination}")
+endif()
